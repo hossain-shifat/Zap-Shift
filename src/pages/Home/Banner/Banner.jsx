@@ -6,7 +6,7 @@ import { assets } from '../../../assets/assets'
 
 const Banner = () => {
     return (
-        <Carousel autoPlay={true} infiniteLoop={true} labels={false} className="max-w-[1200px] mx-auto">
+        <Carousel autoPlay={true} infiniteLoop={true} labels={false}>
             <div>
                 <img src={assets.banner1} />
             </div>
