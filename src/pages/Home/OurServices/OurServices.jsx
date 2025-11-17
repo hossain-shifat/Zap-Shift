@@ -59,7 +59,7 @@ const OurServices = () => {
                         <img src={assets.service} className="max-w-full mx-auto p-4 rounded-full bg-linear-to-b from-[rgba(255,255,255,1)] to-[rgba(255,255,255,0.1)]" alt="" />
                     </div>
                     <div className="space-y-3">
-                        <h1 className="font-bold text-xl w-3xs mx-auto mx-auto">Parcel Return</h1>
+                        <h1 className="font-bold text-xl w-3xs mx-auto">Parcel Return</h1>
                         <p className="text-gray-600">Through our reverse logistics facility we allow end customers to return or exchange their products with online business merchants.</p>
                     </div>
                 </div>
