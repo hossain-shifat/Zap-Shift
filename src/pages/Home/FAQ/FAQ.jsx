@@ -1,3 +1,4 @@
+import { ArrowUpRight } from 'lucide-react'
 import React from 'react'
 
 const FAQ = () => {
@@ -48,6 +49,10 @@ const FAQ = () => {
                         You will receive an email or SMS alert instantly once it is available.
                     </div>
                 </div>
+            </div>
+            <div className="flex justify-center items-center py-4">
+                <button className="btn btn-primary rounded-lg font-bold text-black">Be a Raider</button>
+                <h1 className="flex justify-center items-center w-10 h-10 rounded-full bg-[#0B0B0B] text-primary"><ArrowUpRight /></h1>
             </div>
         </div>
     )
