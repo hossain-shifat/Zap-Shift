@@ -10,7 +10,7 @@ const Register = () => {
             <div class="w-full max-w-[450px] p-7 rounded-2xl">
                 <form>
                     <div className="space-y-1">
-                        <h1 className="font-bold text-4xl">Welcome Back</h1>
+                        <h1 className="font-bold text-4xl">Create an Account</h1>
                         <p className="">Register with ZapShift</p>
                     </div>
                     <div className="my-4">
@@ -24,7 +24,7 @@ const Register = () => {
                     </div>
                     <div className="my-4">
                         <label className="text-lg">Name</label>
-                        <input type="email" placeholder='Name' name='text' className="w-full p-3 bg-base-100 rounded-xl border focus-within:outline outline-[#94A3B8] placeholder:text-[#94A3B8] text-base-content text-md" />
+                        <input type="text" placeholder='Name' name='name' className="w-full p-3 bg-base-100 rounded-xl border focus-within:outline outline-[#94A3B8] placeholder:text-[#94A3B8] text-base-content text-md" />
                     </div>
                     <div className="my-4">
                         <label className="text-lg">Email</label>
