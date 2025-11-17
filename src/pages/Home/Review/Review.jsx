@@ -37,7 +37,7 @@ const Review = () => {
                     rotate: 30,
                     stretch: 0,
                     depth: 200,
-                    modifier: 1,
+                    modifier: 6,
                     slideShadows: true,
                 }}
                 pagination={{

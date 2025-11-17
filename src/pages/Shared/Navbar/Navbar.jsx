@@ -1,6 +1,6 @@
 import React from 'react'
 import Logo from '../../../components/Logo/Logo'
-import { NavLink } from 'react-router'
+import { Link, NavLink } from 'react-router'
 import { ArrowUpRight, Menu } from 'lucide-react'
 
 const Navbar = () => {
@@ -35,7 +35,7 @@ const Navbar = () => {
                 </ul>
             </div>
             <div className="navbar-end flex gap-2">
-                <button className="btn btn-outline hover:bg-transparent rounded-lg">Sign In</button>
+                <Link to='/login' className="btn btn-outline hover:bg-transparent rounded-lg">Sign In</Link>
                 <button className="btn btn-primary rounded-lg text-black">Be a Raider</button>
                 <h1 className="hidden md:block p-2 rounded-full bg-[#0B0B0B] text-primary -ml-2"><ArrowUpRight /></h1>
             </div>

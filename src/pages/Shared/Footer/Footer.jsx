@@ -9,8 +9,8 @@ const Footer = () => {
                 <Logo />
                 <p className="max-w-[300px] md:max-w-full">Enjoy fast, reliable parcel delivery with real-time tracking and zero hassle. From personal package to <br/> business shipments — we deliver on time, every time.</p>
             </div>
-            <div>
-                <ul className="grid grid-cols-3 md:grid-cols-6 gap-2">
+            <div className="border-b-2 border-t-2 border-dashed py-3 w-full max-w-[1100px]">
+                <ul className="flex gap-3 flex-wrap justify-center">
                     <li>Services</li>
                     <li>Coverage</li>
                     <li>About Us</li>
