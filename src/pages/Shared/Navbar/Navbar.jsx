@@ -30,7 +30,7 @@ const Navbar = () => {
             </div>
             <div className="navbar-center hidden lg:flex">
                 {/* large screen */}
-                <ul className="menu menu-horizontal px-1 gap-4 *:text-gray-200">
+                <ul className="menu menu-horizontal px-1 *:text-gray-200 *:py-2 *:px-4">
                     {list}
                 </ul>
             </div>

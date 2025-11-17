@@ -16,3 +16,7 @@ body{
     font-family: 'Urbanist', sans-serif;
     background: #EAECED;
 }
+
+.active{
+    @apply px-4 bg-primary rounded-full
+}
