@@ -32,6 +32,10 @@ import safe_delivery from "./safe-delivery.png";
 import service from "./service.png";
 import tiny_deliveryman from "./tiny-deliveryman.png";
 
+// icons
+import google from '../../src/assets/google.png'
+
+
 export const assets = {
     banner1,
     banner2,
@@ -61,4 +65,5 @@ export const assets = {
     safe_delivery,
     service,
     tiny_deliveryman,
+    google,
 };
