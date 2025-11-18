@@ -49,7 +49,7 @@ const Navbar = () => {
                         :
                         <Link to='/login' className="btn btn-outline hover:bg-transparent rounded-lg">Sign In</Link>
                 }
-                <button className="btn btn-primary rounded-lg text-black">Be a Raider</button>
+                <Link className="btn btn-primary rounded-lg text-black">Be a Raider</Link>
                 <h1 className="hidden md:block p-2 rounded-full bg-[#0B0B0B] text-primary -ml-2"><ArrowUpRight /></h1>
             </div>
         </div>

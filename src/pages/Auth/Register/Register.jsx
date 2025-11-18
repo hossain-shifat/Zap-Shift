@@ -5,17 +5,38 @@ import { Link } from 'react-router'
 import { useForm } from 'react-hook-form'
 import { register } from 'swiper/element'
 import useAuth from '../../../hooks/useAuth'
+import axios from 'axios'
 
 const Register = () => {
 
     const [showPassword, setShowPassword] = useState(false)
     const { register, handleSubmit, formState: { errors } } = useForm()
-    const { registerUser, singInGoogle } = useAuth()
+    const { registerUser, singInGoogle, updateUserProfile } = useAuth()
 
     const handleRegistration = (data) => {
+        const profileImg = data.photo[0]
         registerUser(data.email, data.password)
             .then(result => {
                 console.log(result.user)
+
+                const formData = new FormData()
+                formData.append('image', profileImg)
+
+                axios.post(`https://api.imgbb.com/1/upload?key=${import.meta.env.VITE_IMG_HOST}`, formData)
+                    .then(res => {
+                        console.log(res.data)
+                        const userProfile = {
+                            displayName: data.name,
+                            photoURL: res.data.url
+                        }
+                        updateUserProfile(userProfile)
+                            .then(res => {
+                                console.log(res)
+                            })
+                            .catch(error => {
+                                console.log(error)
+                            })
+                    })
             })
             .catch(error => {
                 console.log(error)
@@ -41,13 +62,14 @@ const Register = () => {
                         <p className="">Register with ZapShift</p>
                     </div>
                     {/* image upload feild */}
-                    <div className="w-16 h-16">
+                    <div className="w-16 h-16 bg-base-300 rounded-full">
                         <label className="cursor-pointer">
                             <div className="relative flex justify-center items-center w-15 h-15">
                                 <User size={40} className="" fill='gray' stroke='gray' />
                                 <ArrowUp size={25} className="absolute text-primary  rounded-full bg-white -right-2 bottom-0" />
                             </div>
-                            <input type="file" name='file' className="hidden" />
+                            <input type="file" {...register('photo', { required: true })} className="hidden" />
+                            {errors.photo?.type === 'required' && <p className="text-red-500">Photo is Required!</p>}
                         </label>
                     </div>
                     {/* name feild */}
