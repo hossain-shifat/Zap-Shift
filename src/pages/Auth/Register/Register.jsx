@@ -4,16 +4,33 @@ import { assets } from '../../../assets/assets'
 import { Link } from 'react-router'
 import { useForm } from 'react-hook-form'
 import { register } from 'swiper/element'
+import useAuth from '../../../hooks/useAuth'
 
 const Register = () => {
 
     const [showPassword, setShowPassword] = useState(false)
     const { register, handleSubmit, formState: { errors } } = useForm()
+    const { registerUser, singInGoogle } = useAuth()
 
     const handleRegistration = (data) => {
-        console.log(data)
+        registerUser(data.email, data.password)
+            .then(result => {
+                console.log(result.user)
+            })
+            .catch(error => {
+                console.log(error)
+            })
     }
 
+    const handleSingInPopUp = () => {
+        singInGoogle()
+            .then(result => {
+                console.log(result.user)
+            })
+            .catch(error => {
+                console.log(error)
+            })
+    }
 
     return (
         <div className="max-w-full mx-auto md:mx-15 md:-mt-5">
@@ -49,11 +66,11 @@ const Register = () => {
                     <div>
                         <label>Password</label>
                         <div className="relative">
-                            <input type={showPassword ? 'text' : 'password'} placeholder='Password' {...register('password', { required: true, minLength: 6, pattern: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/ })} className="w-full p-3 bg-base-100 rounded-xl border focus-within:outline outline-[#94A3B8] placeholder:text-[#94A3B8] text-base-content text-md" />
+                            <input type={showPassword ? 'text' : 'password'} placeholder='Password' {...register('password', { required: true, minLength: 6 })} className="w-full p-3 bg-base-100 rounded-xl border focus-within:outline outline-[#94A3B8] placeholder:text-[#94A3B8] text-base-content text-md" />
                             <span onClick={() => setShowPassword(!showPassword)} className="absolute right-4 top-3 cursor-pointer">{showPassword ? <EyeClosed /> : <Eye />}</span>
                             {errors.password?.type === 'required' && <p className="text-red-500">Password is Required!</p>}
                             {errors.password?.type === 'minLength' && <p className="text-red-500">Password must be 6 characters or longer</p>}
-                            {errors.password?.type === 'pattern' && <p className="text-red-500">Password must have an uppercase, at least one lowercase, atleast one number and at least one special character</p>}
+                            {/* {errors.password?.type === 'pattern' && <p className="text-red-500">Password must have an uppercase, at least one lowercase, atleast one number and at least one special character</p>} */}
                         </div>
                     </div>
                     <div className="w-full my-2">
@@ -68,7 +85,7 @@ const Register = () => {
                         <hr className="w-[45%]" />
                     </div>
                     <div className="w-full">
-                        <button className="btn bg-white text-black border-[#e5e5e5] w-full"><img src={assets.google} className="w-7 h-7" alt="" />Register with Google</button>
+                        <button onClick={handleSingInPopUp} className="btn bg-white text-black border-[#e5e5e5] w-full"><img src={assets.google} className="w-7 h-7" alt="" />Register with Google</button>
                     </div>
                 </div>
             </div>
