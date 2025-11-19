@@ -68,7 +68,7 @@ const Login = () => {
                         <hr className="w-[45%]" />
                     </div>
                     <div className="w-full">
-                        <button onClick={handleSingInPopUp} className="btn bg-white text-black border-[#e5e5e5] w-full"><img src={assets.google} className="w-7 h-7" alt="" />Login with Google</button>
+                        <button onClick={handleSingInPopUp} className="btn bg-base-100 text-black border-[#e5e5e5] w-full"><img src={assets.google} className="w-7 h-7" alt="" />Login with Google</button>
                     </div>
                 </div>
             </div>

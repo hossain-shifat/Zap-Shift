@@ -70,7 +70,7 @@ const Register = () => {
                         <label className="cursor-pointer">
                             <div className="relative flex justify-center items-center w-15 h-15">
                                 <User size={40} className="" fill='gray' stroke='gray' />
-                                <ArrowUp size={25} className="absolute text-primary  rounded-full bg-white -right-2 bottom-0" />
+                                <ArrowUp size={25} className="absolute text-primary  rounded-full bg-base-100 -right-2 bottom-0" />
                             </div>
                             <input type="file" {...register('photo', { required: true })} className="hidden" />
                             {errors.photo?.type === 'required' && <p className="text-red-500">Photo is Required!</p>}
