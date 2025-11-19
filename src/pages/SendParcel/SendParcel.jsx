@@ -1,6 +1,15 @@
 import React from 'react'
+import { useForm } from 'react-hook-form'
 
 const SendParcel = () => {
+    const { register, handleSubmit, formState: { errors } } = useForm()
+
+
+    const handleSendParcel = (data) => {
+        console.log(data)
+    }
+
+
     return (
         <div className="p-5 md:p-20 bg-base-100 rounded-2xl">
             <div className="pb-5">
@@ -10,18 +19,22 @@ const SendParcel = () => {
                 <div className="pb-5 border-b-2 border-base-200">
                     <h1 className="font-bold text-xl">Enter your parcel details</h1>
                 </div>
-               <div className="py-5">
-                    <form>
+                <div className="py-5">
+                    <form onSubmit={handleSubmit(handleSendParcel)}>
                         <div className="space-y-4 border-b-2 pb-5 border-base-200">
                             {/* radio button */}
                             <div className="flex gap-3">
-                                <div className="flex gap-2">
-                                    <input type="radio" name="radio-6" className="radio radio-primary" defaultChecked />
-                                    <label>Document</label>
+                                <div>
+                                    <label className="flex gap-2 cursor-pointer">
+                                        <input type="radio" name="radio-6" className="radio radio-primary" defaultChecked />
+                                        Document
+                                    </label>
                                 </div>
-                                <div className="flex gap-2">
-                                    <input type="radio" name="radio-6" className="radio radio-primary" />
-                                    <label>Not-Document</label>
+                                <div>
+                                    <label className="flex gap-2 cursor-pointer">
+                                        <input type="radio" name="radio-6" className="radio radio-primary" />
+                                        Not-Document
+                                    </label>
                                 </div>
                             </div>
                             {/* parcel input */}
@@ -115,7 +128,7 @@ const SendParcel = () => {
                             </div>
                         </div>
                     </form>
-               </div>
+                </div>
             </div>
         </div>
     )

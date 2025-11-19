@@ -16,7 +16,7 @@ const Login = () => {
         singInUser(data.email, data.password)
             .then(result => {
                 console.log(result)
-                navigate(location?.state || '/')
+                navigate(location.state?.from?.pathname || "/");
             })
             .catch(error => {
                 console.log(error)
@@ -27,7 +27,7 @@ const Login = () => {
         singInGoogle()
             .then(result => {
                 console.log(result.user)
-                navigate(location?.state || '/')
+                navigate(location.state?.from?.pathname || "/");
             })
             .catch(error => {
                 console.log(error)

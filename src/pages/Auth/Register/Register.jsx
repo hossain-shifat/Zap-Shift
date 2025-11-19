@@ -1,7 +1,7 @@
 import { ArrowUp, Eye, EyeClosed, User } from 'lucide-react'
 import React, { useState } from 'react'
 import { assets } from '../../../assets/assets'
-import { Link, useLocation, useNavigation } from 'react-router'
+import { Link, useLocation, useNavigate } from 'react-router'
 import { useForm } from 'react-hook-form'
 import { register } from 'swiper/element'
 import useAuth from '../../../hooks/useAuth'
@@ -12,7 +12,7 @@ const Register = () => {
     const [showPassword, setShowPassword] = useState(false)
     const { register, handleSubmit, formState: { errors } } = useForm()
     const { registerUser, singInGoogle, updateUserProfile } = useAuth()
-    const navigation = useNavigation()
+    const navigation = useNavigate()
     const location = useLocation()
 
     const handleRegistration = (data) => {
@@ -34,7 +34,7 @@ const Register = () => {
                         updateUserProfile(userProfile)
                             .then(res => {
                                 console.log(res)
-                                navigate(location?.state || '/')
+                                navigate(location.state?.from?.pathname || "/");
                             })
                             .catch(error => {
                                 console.log(error)
@@ -50,7 +50,7 @@ const Register = () => {
         singInGoogle()
             .then(result => {
                 console.log(result.user)
-                navigate(location?.state || '/')
+                navigate(location.state?.from?.pathname || "/");
             })
             .catch(error => {
                 console.log(error)
