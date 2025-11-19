@@ -14,7 +14,7 @@ const Navbar = () => {
             <NavLink to='/covarage'><li>Covarage</li></NavLink>
             <NavLink to='/about-page'><li>About Page</li></NavLink>
             <NavLink to='/pricing'><li>Pricing</li></NavLink>
-            <NavLink to='/be-raider'><li>Be a Raider</li></NavLink>
+            <NavLink to='/rider'><li>Be a Rider</li></NavLink>
         </>
 
         const handleLogOut =()=>{
@@ -49,7 +49,7 @@ const Navbar = () => {
                         :
                         <Link to='/login' className="btn btn-outline hover:bg-transparent rounded-lg">Sign In</Link>
                 }
-                <Link className="btn btn-primary rounded-lg text-black">Be a Raider</Link>
+                <Link to='/rider' className="btn btn-primary rounded-lg text-black">Be a Raider</Link>
                 <h1 className="hidden md:block p-2 rounded-full bg-[#0B0B0B] text-primary -ml-2"><ArrowUpRight /></h1>
             </div>
         </div>

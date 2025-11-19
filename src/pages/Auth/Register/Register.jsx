@@ -1,7 +1,7 @@
 import { ArrowUp, Eye, EyeClosed, User } from 'lucide-react'
 import React, { useState } from 'react'
 import { assets } from '../../../assets/assets'
-import { Link } from 'react-router'
+import { Link, useLocation, useNavigation } from 'react-router'
 import { useForm } from 'react-hook-form'
 import { register } from 'swiper/element'
 import useAuth from '../../../hooks/useAuth'
@@ -12,6 +12,8 @@ const Register = () => {
     const [showPassword, setShowPassword] = useState(false)
     const { register, handleSubmit, formState: { errors } } = useForm()
     const { registerUser, singInGoogle, updateUserProfile } = useAuth()
+    const navigation = useNavigation()
+    const location = useLocation()
 
     const handleRegistration = (data) => {
         const profileImg = data.photo[0]
@@ -32,6 +34,7 @@ const Register = () => {
                         updateUserProfile(userProfile)
                             .then(res => {
                                 console.log(res)
+                                navigate(location?.state || '/')
                             })
                             .catch(error => {
                                 console.log(error)
@@ -47,6 +50,7 @@ const Register = () => {
         singInGoogle()
             .then(result => {
                 console.log(result.user)
+                navigate(location?.state || '/')
             })
             .catch(error => {
                 console.log(error)

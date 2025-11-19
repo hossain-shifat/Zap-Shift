@@ -1,7 +1,7 @@
 import { Eye, EyeClosed } from 'lucide-react'
 import React, { useState } from 'react'
 import { assets } from '../../../assets/assets'
-import { Link } from 'react-router'
+import { Link, useLocation, useNavigate } from 'react-router'
 import { useForm } from 'react-hook-form'
 import useAuth from '../../../hooks/useAuth'
 
@@ -9,11 +9,14 @@ const Login = () => {
     const [showPassword, setShowPassword] = useState(false)
     const { register, handleSubmit } = useForm()
     const { singInUser, singInGoogle } = useAuth()
+    const navigate = useNavigate()
+    const location = useLocation()
 
     const handleLogin = (data) => {
         singInUser(data.email, data.password)
             .then(result => {
                 console.log(result)
+                navigate(location?.state || '/')
             })
             .catch(error => {
                 console.log(error)
@@ -24,6 +27,7 @@ const Login = () => {
         singInGoogle()
             .then(result => {
                 console.log(result.user)
+                navigate(location?.state || '/')
             })
             .catch(error => {
                 console.log(error)
@@ -55,7 +59,7 @@ const Login = () => {
                     <div className="w-full my-4">
                         <button className="btn btn-primary w-full text-black font-bold text-[1.1rem] rounded-xl">Login</button>
                     </div>
-                    <p>Don't have any account? <Link to='/register' className="hover:underline text-primary cursor-pointer">Register</Link></p>
+                    <p>Don't have any account? <Link state={location.state} to='/register' className="hover:underline text-primary cursor-pointer">Register</Link></p>
                 </form>
                 <div>
                     <div className="flex justify-center items-center gap-2 my-2">

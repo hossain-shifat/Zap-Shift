@@ -1,5 +1,6 @@
 import { ArrowUpRight } from 'lucide-react'
 import React from 'react'
+import { Link } from 'react-router'
 
 const FAQ = () => {
     return (
@@ -51,7 +52,7 @@ const FAQ = () => {
                 </div>
             </div>
             <div className="flex justify-center items-center py-4">
-                <button className="btn btn-primary rounded-lg font-bold text-black">Be a Raider</button>
+                <Link to='/rider' className="btn btn-primary rounded-lg font-bold text-black">Be a Raider</Link>
                 <h1 className="flex justify-center items-center w-10 h-10 rounded-full bg-[#0B0B0B] text-primary"><ArrowUpRight /></h1>
             </div>
         </div>

@@ -18,5 +18,5 @@ body{
 }
 
 .active{
-    @apply px-4 bg-primary rounded-full
+    @apply px-4 bg-primary rounded-full text-black font-semibold
 }

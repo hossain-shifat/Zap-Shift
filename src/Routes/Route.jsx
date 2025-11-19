@@ -8,6 +8,10 @@ import Login from "../pages/Auth/Login/Login";
 import Register from "../pages/Auth/Register/Register";
 import ForgetPassword from "../pages/Auth/ForgetPassword/ForgetPassword";
 import ResetPassword from "../pages/Auth/ResetPassword/ResetPassword";
+import PrivateRoute from "./PrivateRoute";
+import Rider from "../pages/Rider/Rider";
+import Pricing from "../pages/Pricing/Pricing";
+import Services from "../pages/Services/Services";
 
 
 export const router = createBrowserRouter([
@@ -20,14 +24,26 @@ export const router = createBrowserRouter([
                 Component: Home
             },
             {
+                path: "/services",
+                Component: Services,
+            },
+            {
                 path: "/covarage",
                 Component: Covarage,
                 loader: () => fetch('/serviceCenter.json').then(res => res.json())
             },
             {
+                path: "/pricing",
+                Component: Pricing
+            },
+            {
                 path: "/about-page",
                 Component: About
             },
+            {
+                path: "/rider",
+                element: <PrivateRoute><Rider /></PrivateRoute>
+            }
         ]
     },
     {
