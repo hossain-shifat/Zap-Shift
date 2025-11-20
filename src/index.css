@@ -20,3 +20,6 @@ body{
 .active{
     @apply px-4 bg-primary rounded-full text-black font-semibold
 }
+.activeDashMenu{
+    @apply bg-primary text-black font-semibold
+}

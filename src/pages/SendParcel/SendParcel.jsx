@@ -2,9 +2,13 @@ import React from 'react'
 import { useForm, useWatch } from 'react-hook-form'
 import { useLoaderData } from 'react-router'
 import Swal from 'sweetalert2'
+import UseAxiosSecure from '../../hooks/UseAxiosSecure'
+import useAuth from '../../hooks/useAuth'
 
 const SendParcel = () => {
     const { register, handleSubmit, formState: { errors }, control } = useForm()
+    const { user } = useAuth()
+    const axiosSecure = UseAxiosSecure()
     const serviceCenters = useLoaderData()
     const regionsDuplicate = serviceCenters.map(c => c.region)
     const regions = [...new Set(regionsDuplicate)]
@@ -44,7 +48,7 @@ const SendParcel = () => {
 
         Swal.fire({
             title: "Agree with the cost?",
-            text: `You have to pay $${cost} for delivery`,
+            text: `You have to pay ৳${cost} for delivery`,
             icon: "warning",
             showCancelButton: true,
             confirmButtonColor: "#3085d6",
@@ -54,7 +58,10 @@ const SendParcel = () => {
             if (result.isConfirmed) {
 
 
-                
+                axiosSecure.post('/parcels', data)
+                    .then(res => {
+                        console.log(res.data)
+                    })
 
 
                 Swal.fire({
@@ -113,8 +120,13 @@ const SendParcel = () => {
                                 <div className="space-y-5">
                                     <div className="grid gap-2 w-full">
                                         <label>Sender Name</label>
-                                        <input type="text" placeholder="Sender Name" {...register('senderName', { required: true })} className="input input-md w-full focus-within:outline-none" />
+                                        <input type="text" placeholder="Sender Name" defaultValue={user?.displayName} {...register('senderName', { required: true })} className="input input-md w-full focus-within:outline-none" />
                                         {errors.senderName?.type === 'required' && <p className="text-red-500"> Sender Name is Required!</p>}
+                                    </div>
+                                    <div className="grid gap-2 w-full">
+                                        <label>Sender Email</label>
+                                        <input type="text" placeholder="Sender Email" defaultValue={user?.email} {...register('senderEmail', { required: true })} className="input input-md w-full focus-within:outline-none" />
+                                        {errors.senderEmail?.type === 'required' && <p className="text-red-500"> Sender Email is Required!</p>}
                                     </div>
                                     <div className="grid gap-2 w-full">
                                         <label>Sender Phone No</label>
@@ -124,7 +136,7 @@ const SendParcel = () => {
                                     <div>
                                         <fieldset className="grid gap-2 w-full">
                                             <label>Sender Region</label>
-                                            <select defaultValue="Pick a Region" {...register('senderRegion', { required: true })} className="select">
+                                            <select defaultValue="Pick a Region" {...register('senderRegion', { required: true })} className="select w-full">
                                                 <option disabled={true}>Pick a Region</option>
                                                 {
                                                     regions.map((r, i) => <option key={i} value={r}>{r}</option>)
@@ -136,7 +148,7 @@ const SendParcel = () => {
                                     <div>
                                         <fieldset className="grid gap-2 w-full">
                                             <label>Sender District</label>
-                                            <select defaultValue="Pick a district" {...register('senderDistrict', { required: true })} className="select">
+                                            <select defaultValue="Pick a district" {...register('senderDistrict', { required: true })} className="select w-full">
                                                 <option disabled={true}>Pick a District</option>
                                                 {
                                                     districtsByRegion(senderRegion).map((d, i) => <option key={i} value={d}>{d}</option>)
@@ -168,6 +180,11 @@ const SendParcel = () => {
                                         {errors.receiverName?.type === 'required' && <p className="text-red-500"> Receiver Name is Required!</p>}
                                     </div>
                                     <div className="grid gap-2 w-full">
+                                        <label>Receiver Email</label>
+                                        <input type="text" placeholder="Receiver Email" {...register('receiverEmail', { required: true })} className="input input-md w-full focus-within:outline-none" />
+                                        {errors.receiverEmail?.type === 'required' && <p className="text-red-500"> Receiver Email is Required!</p>}
+                                    </div>
+                                    <div className="grid gap-2 w-full">
                                         <label>Receiver Contact No</label>
                                         <input type="text" placeholder="Receiver Contact No" {...register('receiverPhone', { required: true })} className="input input-md w-full focus-within:outline-none" />
                                         {errors.receiverPhone?.type === 'required' && <p className="text-red-500"> Receiver Contact No. is Required!</p>}
@@ -175,7 +192,7 @@ const SendParcel = () => {
                                     <div>
                                         <fieldset className="grid gap-2 w-full">
                                             <label>Receiver Region</label>
-                                            <select defaultValue="Pick a Region" {...register('receiverRegion', { required: true })} className="select">
+                                            <select defaultValue="Pick a Region" {...register('receiverRegion', { required: true })} className="select w-full">
                                                 <option disabled={true}>Pick a Region</option>
                                                 {
                                                     regions.map((r, i) => <option key={i} value={r}>{r}</option>)
@@ -187,7 +204,7 @@ const SendParcel = () => {
                                     <div>
                                         <fieldset className="grid gap-2 w-full">
                                             <label>Receiver District</label>
-                                            <select defaultValue="Pick a district" {...register('receiverDistrict', { required: true })} className="select">
+                                            <select defaultValue="Pick a district" {...register('receiverDistrict', { required: true })} className="select w-full">
                                                 <option disabled={true}>Pick a District</option>
                                                 {
                                                     districtsByRegion(receiverRegion).map((d, i) => <option key={i} value={d}>{d}</option>)

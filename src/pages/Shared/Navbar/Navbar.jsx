@@ -16,11 +16,20 @@ const Navbar = () => {
             <NavLink to='/pricing'><li>Pricing</li></NavLink>
             <NavLink to='/send-parcel'><li>Send Parcel</li></NavLink>
             <NavLink to='/rider'><li>Be a Rider</li></NavLink>
+
+
+            {
+                user &&
+                <>
+                    <NavLink to='/dashboard/my-parcels'><li>My Parcel</li></NavLink>
+                </>
+            }
+
         </>
 
-        const handleLogOut =()=>{
-            logOut()
-        }
+    const handleLogOut = () => {
+        logOut()
+    }
 
     return (
         <div className="navbar bg-base-200 shadow-sm md:px-10 rounded-2xl">
@@ -38,7 +47,7 @@ const Navbar = () => {
             </div>
             <div className="navbar-center hidden lg:flex">
                 {/* large screen */}
-                <ul className="menu menu-horizontal px-1 *:text-gray-200 *:py-2 *:px-4">
+                <ul className="menu menu-horizontal *:text-gray-200 *:py-2 *:px-4">
                     {list}
                 </ul>
             </div>
