@@ -11,14 +11,14 @@ const MyParcels = () => {
         queryKey: ['myParcels', user?.email],
         enabled: !!user?.email,
         queryFn: async () => {
-            const res = await axiosSecure.get(`/parcels?email=${user?.email}`)
+            const res = await axiosSecure.get(`/parcels?email=${user.email}`)
             return res.data
         }
     })
 
     return (
         <div>
-            <h1>my parcels {parcels.length}</h1>
+            <h1>my parcels {parcels.langth}</h1>
         </div>
     )
 }
