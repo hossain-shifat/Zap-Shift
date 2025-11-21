@@ -1,6 +1,6 @@
 import React from 'react'
 import { useForm, useWatch } from 'react-hook-form'
-import { useLoaderData } from 'react-router'
+import { useLoaderData, useNavigate } from 'react-router'
 import Swal from 'sweetalert2'
 import UseAxiosSecure from '../../hooks/UseAxiosSecure'
 import useAuth from '../../hooks/useAuth'
@@ -9,6 +9,7 @@ const SendParcel = () => {
     const { register, handleSubmit, formState: { errors }, control } = useForm()
     const { user } = useAuth()
     const axiosSecure = UseAxiosSecure()
+    const navigate = useNavigate()
     const serviceCenters = useLoaderData()
     const regionsDuplicate = serviceCenters.map(c => c.region)
     const regions = [...new Set(regionsDuplicate)]
@@ -44,7 +45,7 @@ const SendParcel = () => {
                 cost = minCharge + extraCharge
             }
         }
-        console.log(cost)
+
 
         Swal.fire({
             title: "Agree with the cost?",
@@ -56,19 +57,20 @@ const SendParcel = () => {
             confirmButtonText: "I agree!"
         }).then((result) => {
             if (result.isConfirmed) {
-
-
-                axiosSecure.post('/parcels', data)
+                const parcelData = { ...data, cost: cost }
+                axiosSecure.post('/parcels', parcelData)
                     .then(res => {
-                        console.log(res.data)
+                        if (res.data.insertedId) {
+                            navigate('/dashboard/my-parcels')
+                            Swal.fire({
+                                position: "center",
+                                icon: "success",
+                                title: "Parcel has created please pay",
+                                showConfirmButton: false,
+                                timer: 1500
+                            });
+                        }
                     })
-
-
-                Swal.fire({
-                    title: "Deleted!",
-                    text: "Your file has been deleted.",
-                    icon: "success"
-                });
             }
         });
 
