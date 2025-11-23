@@ -4,11 +4,12 @@ import { assets } from '../../../assets/assets'
 import { Link, useLocation, useNavigate } from 'react-router'
 import { useForm } from 'react-hook-form'
 import useAuth from '../../../hooks/useAuth'
+import SocialLogin from '../SocialLogin/SocialLogin'
 
 const Login = () => {
     const [showPassword, setShowPassword] = useState(false)
     const { register, handleSubmit } = useForm()
-    const { singInUser, singInGoogle } = useAuth()
+    const { singInUser } = useAuth()
     const navigate = useNavigate()
     const location = useLocation()
 
@@ -23,16 +24,6 @@ const Login = () => {
             })
     }
 
-    const handleSingInPopUp = () => {
-        singInGoogle()
-            .then(result => {
-                console.log(result.user)
-                navigate(location.state?.from?.pathname || "/");
-            })
-            .catch(error => {
-                console.log(error)
-            })
-    }
 
     return (
         <div className="max-w-full mx-auto md:mx-15">
@@ -68,7 +59,7 @@ const Login = () => {
                         <hr className="w-[45%]" />
                     </div>
                     <div className="w-full">
-                        <button onClick={handleSingInPopUp} className="btn bg-base-100 text-black border-[#e5e5e5] w-full"><img src={assets.google} className="w-7 h-7" alt="" />Login with Google</button>
+                        <SocialLogin />
                     </div>
                 </div>
             </div>

@@ -9,19 +9,17 @@ const PaymentSuccess = () => {
     const sessionId = searchParams.get('session_id')
     const axiosSecure = UseAxiosSecure()
 
-    console.log(sessionId)
-
     useEffect(() => {
         if (sessionId) {
             axiosSecure.patch(`payment-success?session_id=${sessionId}`)
                 .then(res => {
-                    console.log(res.data)
                     setPaymentInfo({
                         transactionId: res.data.transactionId,
                         trakingId: res.data.trakingId,
                         amount: res.data.amount,
                         customerEmail: res.data.customerEmail,
-                        paidAt: res.data.paidAt
+                        paidAt: res.data.paidAt,
+                        parcelName: res.data.parcelName
                     })
                 })
         }
@@ -72,7 +70,7 @@ const PaymentSuccess = () => {
                     </div>
                 </div>
                 <div className=" text-center py-5">
-                    <p className="flex justify-center items-center gap-2"><Mail size={18}/> Receipt sent to {paymentInfo.customerEmail}</p>
+                    <p className="flex justify-center items-center gap-2"><Mail size={18} /> Receipt sent to {paymentInfo.customerEmail}</p>
                 </div>
                 <div className="space-y-2 w-full">
                     <button className="btn btn-primary w-full text-black"><Download size={18} />Download Receipt</button>

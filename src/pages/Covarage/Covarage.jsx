@@ -21,7 +21,7 @@ const Covarage = () => {
     }
 
     return (
-        <div className="p-5 md:p-10 border border-base-100 shadow-lg rounded-2xl bg-white">
+        <div>
             <div className="space-y-6">
                 <div className="font-bold text-2xl md:text-4xl">
                     <h1>We are available in 64 districts</h1>

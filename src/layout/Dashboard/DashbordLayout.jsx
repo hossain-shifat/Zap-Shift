@@ -1,4 +1,4 @@
-import { Home, Package2, PanelRightClose } from 'lucide-react'
+import { CircleDollarSign, Home, Package2, PanelRightClose } from 'lucide-react'
 import React, { useEffect, useState } from 'react'
 import { Link, Outlet } from 'react-router'
 import Logo from '../../components/Logo/Logo'
@@ -34,7 +34,7 @@ const DashbordLayout = () => {
             <div className="drawer-side">
                 <label htmlFor="my-drawer-4" className="drawer-overlay"></label>
                 <div className={`min-h-full bg-base-200 transition-all ${isCollapsed ? "w-14 items-center" : "w-64"}`}>
-                    <ul className="menu w-full">
+                    <ul className="menu w-full *:text-base-content">
                         <div className="mb-3 is-drawer-close:border-b border-base-300">
                             {!isCollapsed ? <div className="flex justify-start py-2 px-4"><Logo /></div> : <Link to='/' className="flex justify-center items-center"><Home size={18} /></Link>}
                         </div>
@@ -42,6 +42,12 @@ const DashbordLayout = () => {
                             <Link to="/dashboard/my-parcels" onClick={() => setMenu("my-parcel")} className={`${menu === "my-parcel" ? "activeDashMenu" : ""} ${isCollapsed ? 'flex justify-center items-center' : ''}`}>
                                 <h1 ><Package2 size={18} /></h1>
                                 {!isCollapsed && <span>My Parcels</span>}
+                            </Link>
+                        </li>
+                        <li>
+                            <Link to="/dashboard/payment-history" onClick={() => setMenu("payment-history")} className={`${menu === "payment-history" ? "activeDashMenu" : ""} ${isCollapsed ? 'flex justify-center items-center' : ''}`}>
+                                <h1><CircleDollarSign size={18} /></h1>
+                                {!isCollapsed && <span>Payment Histroy</span>}
                             </Link>
                         </li>
                     </ul>

@@ -10,6 +10,7 @@ const SendParcel = () => {
     const { user } = useAuth()
     const axiosSecure = UseAxiosSecure()
     const navigate = useNavigate()
+    
     const serviceCenters = useLoaderData()
     const regionsDuplicate = serviceCenters.map(c => c.region)
     const regions = [...new Set(regionsDuplicate)]
@@ -78,7 +79,7 @@ const SendParcel = () => {
 
 
     return (
-        <div className="p-5 md:p-20 bg-base-100 rounded-2xl">
+        <div className="bg-base-100 rounded-2xl">
             <div className="pb-5">
                 <h1 className="font-bold text-2xl md:text-4xl">Send A Parcel</h1>
             </div>

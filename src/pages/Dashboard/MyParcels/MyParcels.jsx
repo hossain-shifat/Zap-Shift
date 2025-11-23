@@ -5,12 +5,13 @@ import UseAxiosSecure from '../../../hooks/UseAxiosSecure'
 import { BookOpenText, Edit, Trash2 } from 'lucide-react'
 import Swal from 'sweetalert2'
 import { Link } from 'react-router'
+import Loading from '../../../components/Loading/Loading'
 
 const MyParcels = () => {
 
     const { user } = useAuth()
     const axiosSecure = UseAxiosSecure()
-    const { data: parcels = [], refetch } = useQuery({
+    const { isLoading, data: parcels = [], refetch } = useQuery({
         queryKey: ['my-profile', user?.email],
         queryFn: async () => {
             const res = await axiosSecure.get(`/parcels?email=${user.email}`)
@@ -48,15 +49,24 @@ const MyParcels = () => {
     }
 
     const handlePayment = async (parcel) => {
+        const recipientAddress = `${parcel.receiverRegion}, ${parcel.receiverDistrict}, ${parcel.receiverAddress}`
         const paymentInfo = {
             cost: parcel.cost,
             parcelId: parcel._id,
             senderEmail: parcel.senderEmail,
-            parcelName: parcel.parcelName
+            parcelName: parcel.parcelName,
+            receiverName: parcel.receiverName,
+            recipientAddress: recipientAddress,
+            receiverPhone: parcel.receiverPhone,
         }
         const res = await axiosSecure.post('/payment-checkout-session', paymentInfo)
         console.log(res.data)
         window.location.assign(res.data.url);
+    }
+
+
+    if (isLoading) {
+        return <Loading />
     }
 
     return (

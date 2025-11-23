@@ -3,22 +3,24 @@ import React, { useState } from 'react'
 import { assets } from '../../../assets/assets'
 import { Link, useLocation, useNavigate } from 'react-router'
 import { useForm } from 'react-hook-form'
-import { register } from 'swiper/element'
 import useAuth from '../../../hooks/useAuth'
 import axios from 'axios'
+import UseAxiosSecure from '../../../hooks/UseAxiosSecure'
+import SocialLogin from '../SocialLogin/SocialLogin'
 
 const Register = () => {
 
     const [showPassword, setShowPassword] = useState(false)
     const { register, handleSubmit, formState: { errors } } = useForm()
-    const { registerUser, singInGoogle, updateUserProfile } = useAuth()
-    const navigation = useNavigate()
+    const { registerUser, updateUserProfile } = useAuth()
+    const navigate = useNavigate()
     const location = useLocation()
+    const axiosSecure = UseAxiosSecure()
 
     const handleRegistration = (data) => {
         const profileImg = data.photo[0]
         registerUser(data.email, data.password)
-            .then(result => {
+            .then((result) => {
                 console.log(result.user)
 
                 const formData = new FormData()
@@ -26,10 +28,25 @@ const Register = () => {
 
                 axios.post(`https://api.imgbb.com/1/upload?key=${import.meta.env.VITE_IMG_HOST}`, formData)
                     .then(res => {
-                        console.log(res.data)
+                        const photoURL = res.data.url
+
+                        //create user in database
+                        const userInfo = {
+                            email: data.email,
+                            displayName: data.name,
+                            photoURL: photoURL
+                        }
+                        axiosSecure.post('/users', userInfo)
+                            .then(res => {
+                                if (res.data.insertedId) {
+                                    console.log('user created in the database')
+                                }
+                            })
+
+                        // update use in firebase
                         const userProfile = {
                             displayName: data.name,
-                            photoURL: res.data.url
+                            photoURL: photoURL
                         }
                         updateUserProfile(userProfile)
                             .then(res => {
@@ -46,16 +63,6 @@ const Register = () => {
             })
     }
 
-    const handleSingInPopUp = () => {
-        singInGoogle()
-            .then(result => {
-                console.log(result.user)
-                navigate(location.state?.from?.pathname || "/");
-            })
-            .catch(error => {
-                console.log(error)
-            })
-    }
 
     return (
         <div className="max-w-full mx-auto md:mx-15 md:-mt-5">
@@ -111,7 +118,7 @@ const Register = () => {
                         <hr className="w-[45%]" />
                     </div>
                     <div className="w-full">
-                        <button onClick={handleSingInPopUp} className="btn bg-white text-black border-[#e5e5e5] w-full"><img src={assets.google} className="w-7 h-7" alt="" />Register with Google</button>
+                        <SocialLogin />
                     </div>
                 </div>
             </div>

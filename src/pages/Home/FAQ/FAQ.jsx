@@ -8,7 +8,7 @@ const FAQ = () => {
             <div>
                 <h1 className="font-bold text-2xl text-center">Frequently Asked Question (FAQ)</h1>
             </div>
-            <div>
+            <div className="space-y-2">
                 <div className="collapse collapse-arrow bg-base-100 border border-base-300">
                     <input type="radio" name="faq" defaultChecked />
                     <div className="collapse-title font-semibold">How does this posture corrector work?</div>

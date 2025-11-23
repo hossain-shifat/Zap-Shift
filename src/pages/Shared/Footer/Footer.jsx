@@ -4,7 +4,7 @@ import { Facebook, Linkedin, Twitter, Youtube } from 'lucide-react'
 
 const Footer = () => {
     return (
-        <footer className="flex flex-col justify-center items-center text-center border border-base-200 shadow-lg p-4 bg-base-100 *:text-base-content rounded-xl gap-10">
+        <footer className="flex flex-col justify-center items-center text-center border border-base-200 shadow-lg p-4 bg-base-100 *:text-base-content rounded-2xl gap-10">
             <div className="space-y-5">
                 <Logo />
                 <p className="max-w-[300px] md:max-w-full">Enjoy fast, reliable parcel delivery with real-time tracking and zero hassle. From personal package to <br/> business shipments — we deliver on time, every time.</p>

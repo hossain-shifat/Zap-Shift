@@ -33,7 +33,7 @@ const Payment = () => {
 
     return (
         <div>
-            <h1>pls pay {parcel.cost} for: {parcel.parcelName}</h1>
+            <h1>Pls pay {parcel.cost} for: {parcel.parcelName}</h1>
             <button onClick={handlePayment} className="btn btn-primary text-black">Pay</button>
         </div>
     )
