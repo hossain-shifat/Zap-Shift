@@ -20,6 +20,7 @@ import PaymentSuccess from "../pages/Dashboard/Payment/PaymentSuccess/PaymentSuc
 import PaymentCancel from "../pages/Dashboard/Payment/PaymentCancel/PaymentCancel";
 import PaymentHIstory from "../pages/Dashboard/Payment/PaymentHIstory/PaymentHIstory";
 import ApproveRiders from "../pages/Dashboard/ApproveRiders/ApproveRiders";
+import VerificationCode from "../pages/Auth/VerificationCode/VerificationCode";
 
 
 export const router = createBrowserRouter([
@@ -79,6 +80,10 @@ export const router = createBrowserRouter([
             {
                 path: "/reset-password",
                 Component: ResetPassword
+            },
+            {
+                path: "/verify",
+                Component: VerificationCode
             },
         ]
     },
