@@ -5,17 +5,16 @@ import AuthImage from '../../pages/Auth/AuthComponents/AuthImage'
 
 const AuthLayout = () => {
     return (
-        <div className="min-h-screen grid grid-cols-1 md:grid-cols-2 bg-base-100">
-            <div className="flex flex-col min-h-screen">
-                {/* Logo*/}
-                <div className="flex items-start py-4 px-10">
+        <div className="flex justify-between">
+            <div className="flex-1">
+                <div className="flex justify-start py-4 px-5 md:px-10">
                     <Logo />
                 </div>
-                <div className="flex items-center justify-center px-5 min-h-screen">
+                <div className="max-w-full mx-auto">
                     <Outlet />
                 </div>
             </div>
-            <div className="hidden md:block">
+            <div className="flex-1">
                 <AuthImage />
             </div>
         </div>
