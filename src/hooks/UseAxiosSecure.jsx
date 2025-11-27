@@ -21,9 +21,9 @@ const UseAxiosSecure = () => {
         }, (error) => {
             console.log(error)
 
-            const statusCode = error.status;
-            if (statusCode === 401|| statusCode === 403) {
-
+            const statusCode = error.response?.status;
+            if (statusCode === 401 || statusCode === 403) {
+                console.log("Unauthorized: Token invalid or expired")
             }
 
             return Promise.reject(error)

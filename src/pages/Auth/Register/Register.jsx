@@ -28,7 +28,8 @@ const Register = () => {
 
                 axios.post(`https://api.imgbb.com/1/upload?key=${import.meta.env.VITE_IMG_HOST}`, formData)
                     .then(res => {
-                        const photoURL = res.data.url
+                        const photoURL = res.data.data.url
+
 
                         //create user in database
                         const userInfo = {

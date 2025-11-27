@@ -1,4 +1,4 @@
-import { CircleDollarSign, Home, Motorbike, Package2, PanelRightClose } from 'lucide-react'
+import { CircleDollarSign, Home, Motorbike, Package2, PanelRightClose, Users } from 'lucide-react'
 import React, { useEffect, useState } from 'react'
 import { Link, Outlet } from 'react-router'
 import Logo from '../../components/Logo/Logo'
@@ -54,6 +54,12 @@ const DashbordLayout = () => {
                             <Link to="/dashboard/approve-riders" onClick={() => setMenu("approve-riders")} className={`${menu === "approve-riders" ? "activeDashMenu" : ""} ${isCollapsed ? 'flex justify-center items-center' : ''}`}>
                                 <h1><Motorbike size={18} /></h1>
                                 {!isCollapsed && <span>Approve Riders</span>}
+                            </Link>
+                        </li>
+                        <li>
+                            <Link to="/dashboard/user-management" onClick={() => setMenu("user-management")} className={`${menu === "user-management" ? "activeDashMenu" : ""} ${isCollapsed ? 'flex justify-center items-center' : ''}`}>
+                                <h1><Users size={18} /></h1>
+                                {!isCollapsed && <span>User Management</span>}
                             </Link>
                         </li>
                     </ul>

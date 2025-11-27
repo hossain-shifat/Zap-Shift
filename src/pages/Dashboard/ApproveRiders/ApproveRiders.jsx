@@ -18,7 +18,7 @@ const ApproveRiders = () => {
     })
 
     const updateRiderStatus = (rider, status) => {
-        const updateInfo = { status: status, email: rider.email }
+        const updateInfo = { status: status, email: rider.riderEmail }
         axiosSecure.patch(`/riders/${rider._id}`, updateInfo)
             .then(res => {
                 if (res.data.modifiedCount) {
