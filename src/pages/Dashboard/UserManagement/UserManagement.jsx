@@ -17,23 +17,42 @@ const UserManagement = () => {
     })
 
 
-    const handleMakeUser = (user) => {
-        const roleInfo = { role: 'admin' }
+    const updateAdminAction = (user, status) => {
+        const roleInfo = { role: status }
         axiosSecure.patch(`/users/${user._id}`, roleInfo)
             .then(res => {
                 if (res.data.modifiedCount) {
-                    refetch()
+
                     Swal.fire({
-                        position: "center",
-                        icon: "success",
-                        title: `${user.displayName} is marked as ${user.role}`,
-                        showConfirmButton: false,
-                        timer: 2000
+                        title: "Are you sure?",
+                        text: "You won't be able to revert this!",
+                        icon: "warning",
+                        showCancelButton: true,
+                        confirmButtonColor: "#3085d6",
+                        cancelButtonColor: "#d33",
+                        confirmButtonText: "Yes!"
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            refetch()
+                            Swal.fire({
+                                position: "center",
+                                icon: "success",
+                                title: `${user.displayName} is marked as ${status}`,
+                                showConfirmButton: false,
+                                timer: 2000
+                            });
+                        }
                     });
                 }
             })
     }
 
+    const handleMakeAdmin = (user) => {
+        updateAdminAction(user, 'admin')
+    }
+    const handleMakeUser = (user) => {
+        updateAdminAction(user, 'user')
+    }
 
     return (
         <div>
@@ -58,7 +77,7 @@ const UserManagement = () => {
                                     <td>
                                         <div className="flex gap-4">
                                             <div>
-                                                <img className="w-10 h-10 rounded-lg" src={user.photoURL} alt="" />
+                                                <img className="w-10 h-10 object-cover rounded-lg" src={user.photoURL} alt="" />
                                             </div>
                                             <div>
                                                 {user.displayName}
@@ -70,9 +89,9 @@ const UserManagement = () => {
                                     <td className="flex gap-3 justify-center items-center">
                                         {
                                             user.role === 'admin' ?
-                                                <button className="btn btn-square btn-outline hover:bg-transparent"><ShieldX size={18} /> </button>
+                                                <button onClick={() => handleMakeUser(user)} className="btn btn-square btn-outline btn-error hover:bg-transparent"><ShieldX size={18} /> </button>
                                                 :
-                                                <button onClick={() => handleMakeUser(user)} className="btn btn-square btn-outline hover:bg-transparent"><ShieldPlus size={18} /> </button>
+                                                <button onClick={() => handleMakeAdmin(user)} className="btn btn-square btn-outline btn-primary hover:bg-transparent"><ShieldPlus size={18} /> </button>
                                         }
                                     </td>
 
