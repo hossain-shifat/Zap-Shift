@@ -86,12 +86,12 @@ const UserManagement = () => {
                                     </td>
                                     <td>{user.email}</td>
                                     <td>{user.role}</td>
-                                    <td className="flex gap-3 justify-center items-center">
+                                    <td className="flex justify-center items-center">
                                         {
                                             user.role === 'admin' ?
-                                                <button onClick={() => handleMakeUser(user)} className="btn btn-square btn-outline btn-error hover:bg-transparent"><ShieldX size={18} /> </button>
+                                                <button onClick={() => handleMakeUser(user)} className="btn btn-square btn-error hover:bg-transparent"><ShieldX size={18} /> </button>
                                                 :
-                                                <button onClick={() => handleMakeAdmin(user)} className="btn btn-square btn-outline btn-primary hover:bg-transparent"><ShieldPlus size={18} /> </button>
+                                                <button onClick={() => handleMakeAdmin(user)} className="btn btn-square btn-primary hover:bg-transparent"><ShieldPlus size={18} /> </button>
                                         }
                                     </td>
 
