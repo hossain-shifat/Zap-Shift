@@ -80,6 +80,7 @@ const MyParcels = () => {
                             <th>Name</th>
                             <th>Cost</th>
                             <th>Payment Status</th>
+                            <th>Tracking Id</th>
                             <th>Delivery Status</th>
                             <th>Actions</th>
                         </tr>
@@ -93,10 +94,11 @@ const MyParcels = () => {
                                     <td>{parcel.cost}</td>
                                     <td>
                                         {
-                                            parcel.paymentStatus === 'paid' ? <span className="text-green-400 font-bold text-lg">paid</span> : <button onClick={() => handlePayment(parcel)} className="btn btn-primary btn-sm text-black">Pay</button>
+                                            parcel.paymentStatus === 'paid' ? <span className="text-green-400 font-medium text-lg">paid</span> : <button onClick={() => handlePayment(parcel)} className="btn btn-primary btn-sm text-black">Pay</button>
                                         }
                                     </td>
-                                    <td>Schaden</td>
+                                    <td>{parcel.trackingId}</td>
+                                    <td>{parcel.deliveryStatus}</td>
                                     <td className="flex gap-2">
                                         <button className="btn btn-square btn-sm hover:bg-primary">
                                             <Edit size={16} />

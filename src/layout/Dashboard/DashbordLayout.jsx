@@ -1,7 +1,8 @@
-import { CircleDollarSign, Home, Motorbike, Package2, PanelRightClose, Users } from 'lucide-react'
+import { Bike, CircleDollarSign, Home, Motorbike, Package2, PanelRightClose, Users } from 'lucide-react'
 import React, { useEffect, useState } from 'react'
 import { Link, Outlet } from 'react-router'
 import Logo from '../../components/Logo/Logo'
+import useRole from '../../hooks/useRole';
 
 const DashbordLayout = () => {
     const [isCollapsed, setIsCollapsed] = useState(false);
@@ -12,6 +13,9 @@ const DashbordLayout = () => {
             setIsCollapsed(prev => !prev);
         }
     };
+
+    const { role } = useRole()
+
 
     return (
         <div className="drawer lg:drawer-open">
@@ -50,18 +54,29 @@ const DashbordLayout = () => {
                                 {!isCollapsed && <span>Payment Histroy</span>}
                             </Link>
                         </li>
-                        <li>
-                            <Link to="/dashboard/approve-riders" onClick={() => setMenu("approve-riders")} className={`${menu === "approve-riders" ? "activeDashMenu" : ""} ${isCollapsed ? 'flex justify-center items-center' : ''}`}>
-                                <h1><Motorbike size={18} /></h1>
-                                {!isCollapsed && <span>Approve Riders</span>}
-                            </Link>
-                        </li>
-                        <li>
-                            <Link to="/dashboard/user-management" onClick={() => setMenu("user-management")} className={`${menu === "user-management" ? "activeDashMenu" : ""} ${isCollapsed ? 'flex justify-center items-center' : ''}`}>
-                                <h1><Users size={18} /></h1>
-                                {!isCollapsed && <span>User Management</span>}
-                            </Link>
-                        </li>
+                        {
+                            role === 'admin' &&
+                            <>
+                                <li>
+                                    <Link to="/dashboard/approve-riders" onClick={() => setMenu("approve-riders")} className={`${menu === "approve-riders" ? "activeDashMenu" : ""} ${isCollapsed ? 'flex justify-center items-center' : ''}`}>
+                                        <h1><Motorbike size={18} /></h1>
+                                        {!isCollapsed && <span>Approve Riders</span>}
+                                    </Link>
+                                </li>
+                                <li>
+                                    <Link to="/dashboard/assign-riders" onClick={() => setMenu("assign-riders")} className={`${menu === "assign-riders" ? "activeDashMenu" : ""} ${isCollapsed ? 'flex justify-center items-center' : ''}`}>
+                                        <h1><Bike size={18} /></h1>
+                                        {!isCollapsed && <span>Assign Riders</span>}
+                                    </Link>
+                                </li>
+                                <li>
+                                    <Link to="/dashboard/user-management" onClick={() => setMenu("user-management")} className={`${menu === "user-management" ? "activeDashMenu" : ""} ${isCollapsed ? 'flex justify-center items-center' : ''}`}>
+                                        <h1><Users size={18} /></h1>
+                                        {!isCollapsed && <span>User Management</span>}
+                                    </Link>
+                                </li>
+                            </>
+                        }
                     </ul>
                 </div>
             </div>

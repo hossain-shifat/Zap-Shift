@@ -1,17 +1,18 @@
-import React from 'react'
+import React, { useState } from 'react'
 import UseAxiosSecure from '../../../hooks/UseAxiosSecure'
 import { useQuery } from '@tanstack/react-query'
-import { ShieldPlus, ShieldX } from 'lucide-react'
+import { Search, ShieldPlus, ShieldX } from 'lucide-react'
 import Swal from 'sweetalert2'
 
 const UserManagement = () => {
 
     const axiosSecure = UseAxiosSecure()
+    const [search, setSearch] = useState()
 
     const { refetch, data: users = [] } = useQuery({
-        queryKey: ['users'],
+        queryKey: ['users',search],
         queryFn: async () => {
-            const res = await axiosSecure.get(`/users`)
+            const res = await axiosSecure.get(`/users?search=${search}`)
             return res.data
         }
     })
@@ -19,7 +20,7 @@ const UserManagement = () => {
 
     const updateAdminAction = (user, status) => {
         const roleInfo = { role: status }
-        axiosSecure.patch(`/users/${user._id}`, roleInfo)
+        axiosSecure.patch(`/users/${user._id}/role`, roleInfo)
             .then(res => {
                 if (res.data.modifiedCount) {
 
@@ -56,6 +57,12 @@ const UserManagement = () => {
 
     return (
         <div>
+            <div>
+                <label className="input">
+                    <Search size={16} />
+                    <input onChange={(e) => setSearch(e.target.value)} type="search" className="grow" placeholder="Search" />
+                </label>
+            </div>
             <div className="overflow-x-auto">
                 <table className="table table-zebra">
                     {/* head */}
