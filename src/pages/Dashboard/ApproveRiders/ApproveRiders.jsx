@@ -57,6 +57,7 @@ const ApproveRiders = () => {
                             <th>Email</th>
                             <th>Status</th>
                             <th>District</th>
+                            <th>Work Status</th>
                             <th>Actions</th>
                         </tr>
                     </thead>
@@ -69,6 +70,7 @@ const ApproveRiders = () => {
                                     <td>{rider.riderEmail}</td>
                                     <td className={`${rider.status === 'pending' ? 'text-orange-400' : rider.status === 'approved' ? 'text-green-600' : 'text-red-500'}`}>{rider.status}</td>
                                     <td>{rider.riderDistrict}</td>
+                                    <td>{rider.workStatus}</td>
                                     <td className="flex gap-2">
                                         <button onClick={() => handleApprved(rider)} className="btn btn-square btn-sm hover:bg-transparent"><UserRoundCheck size={18} /></button>
                                         <button onClick={() => handleRejection(rider)} className="btn btn-square btn-sm hover:bg-transparent"><UserRoundX size={18} /></button>

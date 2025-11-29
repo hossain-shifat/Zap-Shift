@@ -10,7 +10,7 @@ const UserManagement = () => {
     const [search, setSearch] = useState()
 
     const { refetch, data: users = [] } = useQuery({
-        queryKey: ['users',search],
+        queryKey: ['users', search],
         queryFn: async () => {
             const res = await axiosSecure.get(`/users?search=${search}`)
             return res.data

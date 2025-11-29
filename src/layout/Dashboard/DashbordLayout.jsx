@@ -3,10 +3,13 @@ import React, { useEffect, useState } from 'react'
 import { Link, Outlet } from 'react-router'
 import Logo from '../../components/Logo/Logo'
 import useRole from '../../hooks/useRole';
+import useAuth from '../../hooks/useAuth';
 
 const DashbordLayout = () => {
     const [isCollapsed, setIsCollapsed] = useState(false);
     const [menu, setMenu] = useState('menu')
+
+    const { user } = useAuth()
 
     const handleDrawerToggle = () => {
         if (window.innerWidth >= 1024) {
@@ -16,17 +19,25 @@ const DashbordLayout = () => {
 
     const { role } = useRole()
 
-
     return (
         <div className="drawer lg:drawer-open">
             <input id="my-drawer-4" type="checkbox" className="drawer-toggle" />
 
             {/* PAGE CONTENT */}
             <div className="drawer-content">
-                <nav className="navbar w-full bg-base-100">
+                <nav className="navbar w-full bg-base-100 flex justify-between">
                     <label htmlFor="my-drawer-4" onClick={handleDrawerToggle} className="btn btn-square btn-ghost" >
                         <PanelRightClose className={`${isCollapsed ? "rotate-180" : ""}`} />
                     </label>
+                    <div className="navbar-end flex gap-4">
+                        <div>
+                            <img className="w-10 h-10 rounded-full" src={user.photoURL} alt="" />
+                        </div>
+                        <div className="leading-5">
+                            <h1>{user.displayName}</h1>
+                            <p>{role}</p>
+                        </div>
+                    </div>
                 </nav>
 
                 <div className="m-2 md:m-5 p-5 md:p-10 rounded-2xl min-h-screen bg-base-100">
