@@ -2,6 +2,7 @@ import { useQuery } from '@tanstack/react-query'
 import React, { useRef, useState } from 'react'
 import UseAxiosSecure from '../../../hooks/UseAxiosSecure'
 import Loading from '../../../components/Loading/Loading'
+import Swal from 'sweetalert2'
 
 const AssignRiders = () => {
 
@@ -10,7 +11,7 @@ const AssignRiders = () => {
     const riderModalRef = useRef()
 
     // load data for parcels (delivaruStatus = prnding-pickup only)
-    const { isLoading, data: parcels = [] } = useQuery({
+    const { isLoading, data: parcels = [], refetch: parcelRefetch } = useQuery({
         queryKey: ['parcels', 'pending-pickup'],
         queryFn: async () => {
             const res = await axiosSecure.get('/parcels?deliveryStatus=pending-pickup')
@@ -42,7 +43,20 @@ const AssignRiders = () => {
             riderName: rider.riderName,
             parcelId: selectedParcel._id
         }
-        axiosSecure.patch(``, riderAssignInfo)
+        axiosSecure.patch(`/parcels/${selectedParcel._id}`, riderAssignInfo)
+            .then(res => {
+                if (res.data.modifiedCount) {
+                    parcelRefetch()
+                    riderModalRef.current.close()
+                    Swal.fire({
+                        position: "center",
+                        icon: "success",
+                        title: `Rider has been assigned`,
+                        showConfirmButton: false,
+                        timer: 2000
+                    });
+                }
+            })
     }
 
     if (isLoading) return <Loading />
@@ -69,23 +83,23 @@ const AssignRiders = () => {
                     </thead>
                     <tbody>
                         {
-                            parcels.map((rider, index) => (
+                            parcels.map((parcel, index) => (
                                 <tr key={index}>
                                     <th>{index + 1}</th>
-                                    <td className="capitalize">{rider.parcelName}</td>
-                                    <td>${rider.cost}</td>
-                                    <td>{rider.trackingId}</td>
-                                    <td>{rider.deliveryStatus}</td>
+                                    <td className="capitalize">{parcel.parcelName}</td>
+                                    <td>${parcel.cost}</td>
+                                    <td>{parcel.trackingId}</td>
+                                    <td>{parcel.deliveryStatus}</td>
                                     <td>{
-                                        new Date(rider.createdAt).toLocaleDateString("en-US", {
+                                        new Date(parcel.createdAt).toLocaleDateString("en-US", {
                                             month: "short",
                                             day: "numeric",
                                             year: "numeric"
                                         })
                                     }</td>
-                                    <td>{rider.senderRegion}, {rider.senderDistrict}</td>
+                                    <td>{parcel.senderRegion}, {parcel.senderDistrict}</td>
                                     <td className="flex gap-2">
-                                        <button onClick={() => openAssignRiderModal(rider)} className="btn btn-primary text-black">Find Riders</button>
+                                        <button onClick={() => openAssignRiderModal(parcel)} className="btn btn-primary text-black">Find Riders</button>
                                     </td>
                                 </tr>
                             ))

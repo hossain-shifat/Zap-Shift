@@ -1,4 +1,4 @@
-import { Bike, CircleDollarSign, Home, Motorbike, Package2, PanelRightClose, Users } from 'lucide-react'
+import { Bike, CircleDollarSign, Home, ListCheck, ListChecks, Motorbike, Package2, PanelRightClose, Users } from 'lucide-react'
 import React, { useEffect, useState } from 'react'
 import { Link, Outlet } from 'react-router'
 import Logo from '../../components/Logo/Logo'
@@ -29,7 +29,7 @@ const DashbordLayout = () => {
                     <label htmlFor="my-drawer-4" onClick={handleDrawerToggle} className="btn btn-square btn-ghost" >
                         <PanelRightClose className={`${isCollapsed ? "rotate-180" : ""}`} />
                     </label>
-                    <div className="navbar-end flex gap-4">
+                    <div className="navbar-end flex gap-4 px-5">
                         <div>
                             <img className="w-10 h-10 rounded-full" src={user.photoURL} alt="" />
                         </div>
@@ -64,6 +64,8 @@ const DashbordLayout = () => {
                                 <h1><CircleDollarSign size={18} /></h1>
                                 {!isCollapsed && <span>Payment Histroy</span>}
                             </Link>
+
+                            {/* admin only */}
                         </li>
                         {
                             role === 'admin' &&
@@ -88,6 +90,20 @@ const DashbordLayout = () => {
                                 </li>
                             </>
                         }
+
+                        {/* rider */}
+                        {
+                            role === 'rider' &&
+                            <>
+                                <li>
+                                    <Link to="/dashboard/assigned-delivery" onClick={() => setMenu("assigned-delivery")} className={`${menu === "assigned-delivery" ? "activeDashMenu" : ""} ${isCollapsed ? 'flex justify-center items-center' : ''}`}>
+                                        <h1><ListChecks size={18} /></h1>
+                                        {!isCollapsed && <span>Assigned Delivery</span>}
+                                    </Link>
+                                </li>
+                            </>
+                        }
+
                     </ul>
                 </div>
             </div>
