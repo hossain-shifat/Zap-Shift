@@ -1,4 +1,4 @@
-import { Bike, CircleDollarSign, Home, ListCheck, ListChecks, Motorbike, Package2, PanelRightClose, Users } from 'lucide-react'
+import { Bike, CircleCheckBig, CircleDollarSign, Home, ListCheck, ListChecks, Motorbike, Package2, PanelRightClose, Users } from 'lucide-react'
 import React, { useEffect, useState } from 'react'
 import { Link, Outlet } from 'react-router'
 import Logo from '../../components/Logo/Logo'
@@ -99,6 +99,12 @@ const DashbordLayout = () => {
                                     <Link to="/dashboard/assigned-delivery" onClick={() => setMenu("assigned-delivery")} className={`${menu === "assigned-delivery" ? "activeDashMenu" : ""} ${isCollapsed ? 'flex justify-center items-center' : ''}`}>
                                         <h1><ListChecks size={18} /></h1>
                                         {!isCollapsed && <span>Assigned Delivery</span>}
+                                    </Link>
+                                </li>
+                                <li>
+                                    <Link to="/dashboard/completed-delivery" onClick={() => setMenu("completed-delivery")} className={`${menu === "completed-delivery" ? "activeDashMenu" : ""} ${isCollapsed ? 'flex justify-center items-center' : ''}`}>
+                                        <h1><CircleCheckBig size={18} /></h1>
+                                        {!isCollapsed && <span>Completed Delivery</span>}
                                     </Link>
                                 </li>
                             </>

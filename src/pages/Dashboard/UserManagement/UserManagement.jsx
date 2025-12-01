@@ -3,11 +3,12 @@ import UseAxiosSecure from '../../../hooks/UseAxiosSecure'
 import { useQuery } from '@tanstack/react-query'
 import { Search, ShieldPlus, ShieldX } from 'lucide-react'
 import Swal from 'sweetalert2'
+import Loading from '../../../components/Loading/Loading'
 
 const UserManagement = () => {
 
     const axiosSecure = UseAxiosSecure()
-    const [search, setSearch] = useState()
+    const [search, setSearch] = useState('')
 
     const { refetch, data: users = [] } = useQuery({
         queryKey: ['users', search],
@@ -73,7 +74,7 @@ const UserManagement = () => {
                             <th>Email</th>
                             <th>Role</th>
                             <th>Admin Actions</th>
-                            <th>Others Actions</th>
+                            {/* <th>Others Actions</th> */}
                         </tr>
                     </thead>
                     <tbody>
