@@ -91,13 +91,15 @@ const MyParcels = () => {
                                 <tr key={index}>
                                     <th>{index + 1}</th>
                                     <td>{parcel.parcelName}</td>
-                                    <td>{parcel.cost}</td>
+                                    <td>${parcel.cost}</td>
                                     <td>
                                         {
                                             parcel.paymentStatus === 'paid' ? <span className="text-green-400 font-medium text-lg">paid</span> : <button onClick={() => handlePayment(parcel)} className="btn btn-primary btn-sm text-black">Pay</button>
                                         }
                                     </td>
-                                    <td>{parcel.trackingId}</td>
+                                    <td>
+                                        <Link to={`/track-parcel/${parcel.trackingId}`} className="hover:underline">{parcel.trackingId}</Link>
+                                    </td>
                                     <td>{parcel.deliveryStatus}</td>
                                     <td className="flex gap-2">
                                         <button className="btn btn-square btn-sm hover:bg-primary">

@@ -1,5 +1,5 @@
 import { useQuery } from '@tanstack/react-query'
-import React from 'react'
+import React, { useState } from 'react'
 import useAuth from '../../../hooks/useAuth'
 import UseAxiosSecure from '../../../hooks/UseAxiosSecure'
 import Swal from 'sweetalert2'
@@ -8,6 +8,7 @@ const AssignDeliveries = () => {
 
     const { user } = useAuth()
     const axiosSecure = UseAxiosSecure()
+    const [riderStatus, setRiderStatus] = useState('')
 
     const { data: parcels = [], refetch } = useQuery({
         queryKey: ['parcel', user.email, 'rider-assigned'],
@@ -19,7 +20,12 @@ const AssignDeliveries = () => {
 
 
     const handleStatusUpdate = (parcel, status) => {
-        const statusInfo = { deliveryStatus: status, riderId: parcel.riderId }
+        setRiderStatus(status)
+        const statusInfo = {
+            deliveryStatus: status,
+            riderId: parcel.riderId,
+            trackingId: parcel.trackingId
+        }
 
         let message = `Parcel Status is updated with ${status}`
 

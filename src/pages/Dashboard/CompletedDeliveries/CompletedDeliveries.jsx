@@ -2,13 +2,14 @@ import React from 'react'
 import useAuth from '../../../hooks/useAuth'
 import UseAxiosSecure from '../../../hooks/UseAxiosSecure'
 import { useQuery } from '@tanstack/react-query'
+import Loading from '../../../components/Loading/Loading'
 
 const CompletedDeliveries = () => {
 
     const { user } = useAuth()
     const axiosSecure = UseAxiosSecure()
 
-    const { data: parcels = [], refetch } = useQuery({
+    const { isLoading, data: parcels = [], refetch } = useQuery({
         queryKey: ['parcel', user.email, 'rider-assigned'],
         queryFn: async () => {
             const res = await axiosSecure.get(`/parcels/rider?riderEmail=${user.email}&deliveryStatus=parcel-delivered`)
@@ -22,6 +23,10 @@ const CompletedDeliveries = () => {
         } else {
             return parcel.cost * 0.6
         }
+    }
+
+    if (isLoading) {
+        return <Loading />
     }
 
     return (

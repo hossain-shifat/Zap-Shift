@@ -29,7 +29,7 @@ const DashbordLayout = () => {
                     <label htmlFor="my-drawer-4" onClick={handleDrawerToggle} className="btn btn-square btn-ghost" >
                         <PanelRightClose className={`${isCollapsed ? "rotate-180" : ""}`} />
                     </label>
-                    <div className="navbar-end flex gap-4 px-5">
+                    <nav className="navbar-end flex gap-4 max-w-full pr-5">
                         <div>
                             <img className="w-10 h-10 rounded-full" src={user.photoURL} alt="" />
                         </div>
@@ -37,10 +37,10 @@ const DashbordLayout = () => {
                             <h1>{user.displayName}</h1>
                             <p>{role}</p>
                         </div>
-                    </div>
+                    </nav>
                 </nav>
 
-                <div className="m-2 md:m-5 p-5 md:p-10 rounded-2xl min-h-screen bg-base-100">
+                <div className="m-3 md:m-5 p-5 md:p-10 rounded-2xl min-h-screen bg-base-100">
                     <Outlet />
                 </div>
             </div>
