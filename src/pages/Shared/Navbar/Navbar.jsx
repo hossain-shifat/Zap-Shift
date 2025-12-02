@@ -35,7 +35,7 @@ const Navbar = () => {
         <div className="navbar bg-base-200 shadow-sm md:px-10 rounded-2xl">
             <div className="navbar-start">
                 <div className="dropdown">
-                    <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
+                    <div tabIndex={0} role="button" className="btn btn-ghost hover:bg-transparent border-none shadow-none lg:hidden">
                         <Menu />
                     </div>
                     {/* mobile scteen */}
