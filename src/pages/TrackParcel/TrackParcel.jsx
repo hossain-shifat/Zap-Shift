@@ -23,7 +23,6 @@ const TrackParcel = () => {
         <div>
             <div>
                 <h1 className="font-black text-2xl md:text-3xl">Track Your Parcel: {trackingId}</h1>
-                <p>{trackings.length}</p>
             </div>
             <ul className="timeline timeline-vertical">
                 {

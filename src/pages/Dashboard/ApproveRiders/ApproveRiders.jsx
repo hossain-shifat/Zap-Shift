@@ -46,7 +46,10 @@ const ApproveRiders = () => {
     }
 
     return (
-        <div>
+        <div className="space-y-10">
+            <div>
+                <h1 className="font-bold text-2xl md:text-4xl">Apporve Riders</h1>
+            </div>
             <div className="overflow-x-auto">
                 <table className="table table-zebra">
                     {/* head */}

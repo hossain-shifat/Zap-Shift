@@ -26,6 +26,7 @@ import image_upload_icon from "./image-upload-icon.png";
 import live_tracking from "./live-tracking.png";
 import location_merchant from "./location-merchant.png";
 import logo from "./logo.png";
+import logoIcon from "./logoIcon.png";
 import reviewQuote from "./reviewQuote.png";
 import running from "./running.gif";
 import safe_delivery from "./safe-delivery.png";
@@ -60,6 +61,7 @@ export const assets = {
     live_tracking,
     location_merchant,
     logo,
+    logoIcon,
     reviewQuote,
     running,
     safe_delivery,
